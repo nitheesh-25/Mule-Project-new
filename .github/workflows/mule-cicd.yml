@@ -30,8 +30,7 @@ jobs:
       run: mvn clean package
 
     - name: Build and Deploy to CloudHub
-        run: |
-          mvn clean deploy -DmuleDeploy
+        run: mvn clean deploy -DmuleDeploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}

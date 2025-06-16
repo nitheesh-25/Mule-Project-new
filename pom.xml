@@ -8,6 +8,8 @@
 	<packaging>mule-application</packaging>
 
 	<name>newxml</name>
+	
+	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,6 +17,12 @@
 
 		<app.runtime>4.9.0</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
+    <mule.maven.plugin.version>3.9.2</mule.maven.plugin.version>
+    <mule.runtime.version>4.6.0</mule.runtime.version>
+    <anypoint.env>${env.ENVIRONMENT}</anypoint.env>
+    <anypoint.business.group>${env.BUSINESS_GROUP_ID}</anypoint.business.group>
+    <anypoint.client.id>${env.ANYPOINT_CLIENT_ID}</anypoint.client.id>
+    <anypoint.client.secret>${env.ANYPOINT_CLIENT_SECRET}</anypoint.client.secret>
 	</properties>
 
 	<build>
@@ -99,5 +107,43 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	
+	<properties>
+    <mule.maven.plugin.version>3.9.2</mule.maven.plugin.version>
+    <mule.runtime.version>4.6.0</mule.runtime.version>
+    <anypoint.env>${env.ENVIRONMENT}</anypoint.env>
+    <anypoint.business.group>${env.BUSINESS_GROUP_ID}</anypoint.business.group>
+    <anypoint.client.id>${env.ANYPOINT_CLIENT_ID}</anypoint.client.id>
+    <anypoint.client.secret>${env.ANYPOINT_CLIENT_SECRET}</anypoint.client.secret>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.mule.tools.maven</groupId>
+        <artifactId>mule-maven-plugin</artifactId>
+        <version>${mule.maven.plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <deployment>
+            <type>cloudhub</type>
+            <environment>${anypoint.env}</environment>
+            <businessGroup>${anypoint.business.group}</businessGroup>
+            <target>CloudHub</target>
+            <connectedAppClientId>${anypoint.client.id}</connectedAppClientId>
+            <connectedAppClientSecret>${anypoint.client.secret}</connectedAppClientSecret>
+            <applicationName>my-mule-app</applicationName>
+            <workers>
+              <amount>1</amount>
+              <type>MICRO</type>
+            </workers>
+            <region>us-east-1</region>
+            <objectStoreV2>true</objectStoreV2>
+          </deployment>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+	
 
 </project>

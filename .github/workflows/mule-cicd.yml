@@ -29,26 +29,11 @@ jobs:
     - name: Build with Maven
       run: mvn clean package
 
-    - name: Deploy to CloudHub using client_credentials
-      env:
-        CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
-        ENVIRONMENT: ${{ secrets.ANYPOINT_ENV }}
-        APP_NAME: ${{ secrets.ANYPOINT_APP_NAME }}
-      run: |
-        echo "🔐 Getting access token using client_credentials..."
-        TOKEN=$(curl -s -X POST https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token \
-          -H "Content-Type: application/x-www-form-urlencoded" \
-          -d "grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET" \
-          | jq -r '.access_token')
-
-        if [ "$TOKEN" == "null" ] || [ -z "$TOKEN" ]; then
-          echo "❌ Failed to get access token."
-          exit 1
-        fi
-
-        echo "📦 Deploying application to CloudHub..."
-        curl -X POST https://anypoint.mulesoft.com/cloudhub/api/v2/applications \
-          -H "Authorization: Bearer $TOKEN" \
-          -F "file=@target/newxml-1.0.0-SNAPSHOT-mule-application.jar" \
-          -F "appInfo={\"domain\":\"$APP_NAME\",\"environment\":\"$ENVIRONMENT\",\"region\":\"us-east-1\"};type=application/json"
+    - name: Build and Deploy to CloudHub
+        run: |
+          mvn clean deploy -DmuleDeploy
+        env:
+          ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
+          ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
+          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+          BUSINESS_GROUP_ID: ${{ secrets.BUSINESS_GROUP_ID }}

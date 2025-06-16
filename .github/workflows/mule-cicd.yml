@@ -28,3 +28,24 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean package
+
+    - name: Deploy to CloudHub
+      env:
+        CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
+        USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
+        PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
+        ENVIRONMENT: ${{ secrets.ANYPOINT_ENV }}
+        APP_NAME: ${{ secrets.ANYPOINT_APP_NAME }}
+      run: |
+        # Get access token
+        TOKEN=$(curl -s -X POST https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token \
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          -d "grant_type=password&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&username=$USERNAME&password=$PASSWORD" \
+          | jq -r '.access_token')
+
+        # Deploy application
+        curl -X POST https://anypoint.mulesoft.com/cloudhub/api/v2/applications \
+          -H "Authorization: Bearer $TOKEN" \
+          -F "file=@target/*.jar" \
+          -F "appInfo={\"domain\":\"$APP_NAME\",\"environment\":\"$ENVIRONMENT\"};type=application/json"

@@ -33,7 +33,7 @@
 					<sharedLibraries>
 						<sharedLibrary>
 							<groupId>com.mycompany</groupId>
-							<artifactId>mysql-connector-j-9.3.0</artifactId>
+							<artifactId>mysql-connector-j-8.0.33</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
 				</configuration>
@@ -68,7 +68,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.mycompany</groupId>
-			<artifactId>mysql-connector-j-9.3.0</artifactId>
+			<artifactId>mysql-connector-j-8.0.33</artifactId>
 			<version>0.1</version>
 		</dependency>
 	</dependencies>

@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: OrderRAML
+version: v1
+baseUri: /api
+mediaType: application/json
+
+/createorders:
+  post:
+    description: Create a new order
+    body:
+      application/json:
+        example: |
+          {
+            "customer": "Alice",
+            "item": "Tablet",
+            "status": "processing"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "orderId": 1,
+                "customer": "Alice",
+                "item": "Tablet",
+                "status": "processing"
+              }
+
+/getorders:
+  get:
+    description: Retrieve all orders
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "orderId": 1,
+                  "customer": "Alice",
+                  "item": "Tablet",
+                  "status": "processing"
+                }
+              ]

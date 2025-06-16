@@ -47,5 +47,5 @@ jobs:
         # Deploy application
         curl -X POST https://anypoint.mulesoft.com/cloudhub/api/v2/applications \
           -H "Authorization: Bearer $TOKEN" \
-          -F "file=@target/*.jar" \
+          -F "file=@target/newxml-1.0.0-SNAPSHOT-mule-application.jar" \
           -F "appInfo={\"domain\":\"$APP_NAME\",\"environment\":\"$ENVIRONMENT\"};type=application/json"

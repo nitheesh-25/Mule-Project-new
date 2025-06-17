@@ -14,8 +14,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<app.runtime>4.9.0</app.runtime>
-		<mule.maven.plugin.version>4.1.1</mule.maven.plugin.version>
+		<app.runtime>4.9.6</app.runtime>
+		<mule.maven.plugin.version>4.2.1</mule.maven.plugin.version>
 	</properties>
 
 	<build>
@@ -25,10 +25,12 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
+		    
+</plugin>
 			<plugin>
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
+    <version>4.2.1</version>
     <extensions>true</extensions>
     <configuration>
         <classifier>mule-application</classifier>
@@ -36,8 +38,11 @@
             <uri>https://anypoint.mulesoft.com</uri>
             <provider>MC</provider>
             <environment>Sandbox</environment>
-            <target>Cloudhub-US-East-1</target>
+            <target>Cloudhub-US-East-2</target>
             <server>Repository</server>
+			<muleVersion>${muleVersion}</muleVersion>
+      <username>nitheesh_p</username>
+      <password>Nspnsp@25</password>
             <applicationName>${project.artifactId}</applicationName>
             <releaseChannel>Edge</releaseChannel>
             <replicas>1</replicas>
@@ -115,6 +120,12 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	<pluginRepositories>
+  <pluginRepository>
+    <id>mule-public</id>
+    <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+  </pluginRepository>
+</pluginRepositories>
 	<distributionManagement>
     <repository>
         <id>Repository</id>

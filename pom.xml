@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>a6b8bc47-174c-4a54-b421-a77d90d7ae8f</groupId>
 	<artifactId>newxml</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>newxml</name>
@@ -14,15 +14,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<app.runtime>4.9.0</app.runtime>
+		<app.runtime>4.9.6</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
-    <mule.maven.plugin.version>3.9.2</mule.maven.plugin.version>
-    <mule.runtime.version>4.6.0</mule.runtime.version>
-    <anypoint.env>${env.ENVIRONMENT}</anypoint.env>
-    <anypoint.business.group>${env.BUSINESS_GROUP_ID}</anypoint.business.group>
-    <anypoint.client.id>${env.ANYPOINT_CLIENT_ID}</anypoint.client.id>
-    <anypoint.client.secret>${env.ANYPOINT_CLIENT_SECRET}</anypoint.client.secret>
 	</properties>
 
 	<build>
@@ -33,19 +26,28 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<sharedLibraries>
-						<sharedLibrary>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-						</sharedLibrary>
-					</sharedLibraries>
-				</configuration>
-			</plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>${mule.maven.plugin.version}</version>
+    <extensions>true</extensions>
+    <configuration>
+        <classifier>mule-application</classifier>
+        <cloudhub2Deployment>
+            <uri>https://anypoint.mulesoft.com</uri>
+            <provider>MC</provider>
+            <environment>Sandbox</environment>
+            <target>Cloudhub-US-East-2</target>
+            <server>Repository</server>
+            <applicationName>${project.artifactId}</applicationName>
+            <releaseChannel>Edge</releaseChannel>
+            <replicas>1</replicas>
+            <vCores>0.1</vCores>
+            <deploymentSettings>
+                <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+            </deploymentSettings>
+        </cloudhub2Deployment>
+    </configuration>
+</plugin>
 		</plugins>
 	</build>
 
@@ -94,6 +96,12 @@
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+    <id>Repository</id>
+    <name>Private Exchange repository</name>
+    <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+    <layout>default</layout>
+</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -107,43 +115,13 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
-	<properties>
-    <mule.maven.plugin.version>3.9.2</mule.maven.plugin.version>
-    <mule.runtime.version>4.6.0</mule.runtime.version>
-    <anypoint.env>${env.ENVIRONMENT}</anypoint.env>
-    <anypoint.business.group>${env.BUSINESS_GROUP_ID}</anypoint.business.group>
-    <anypoint.client.id>${env.ANYPOINT_CLIENT_ID}</anypoint.client.id>
-    <anypoint.client.secret>${env.ANYPOINT_CLIENT_SECRET}</anypoint.client.secret>
-  </properties>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.mule.tools.maven</groupId>
-        <artifactId>mule-maven-plugin</artifactId>
-        <version>${mule.maven.plugin.version}</version>
-        <extensions>true</extensions>
-        <configuration>
-          <deployment>
-            <type>cloudhub</type>
-            <environment>${anypoint.env}</environment>
-            <businessGroup>${anypoint.business.group}</businessGroup>
-            <target>CloudHub</target>
-            <connectedAppClientId>${anypoint.client.id}</connectedAppClientId>
-            <connectedAppClientSecret>${anypoint.client.secret}</connectedAppClientSecret>
-            <applicationName>my-mule-app</applicationName>
-            <workers>
-              <amount>1</amount>
-              <type>MICRO</type>
-            </workers>
-            <region>us-east-1</region>
-            <objectStoreV2>true</objectStoreV2>
-          </deployment>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-	
+	<distributionManagement>
+    <repository>
+        <id>Repository</id>
+        <name>Corporate Repository</name>
+        <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+        <layout>default</layout>
+    </repository>
+</distributionManagement>
 
 </project>

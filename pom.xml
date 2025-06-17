@@ -25,34 +25,32 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
-		    
-</plugin>
 			<plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>4.2.1</version>
-    <extensions>true</extensions>
-    <configuration>
-        <classifier>mule-application</classifier>
-        <cloudhub2Deployment>
-            <uri>https://anypoint.mulesoft.com</uri>
-            <provider>MC</provider>
-            <environment>Sandbox</environment>
-            <target>Cloudhub-US-East-2</target>
-            <server>Repository</server>
-			<muleVersion>${muleVersion}</muleVersion>
-      <username>nitheesh_p</username>
-      <password>Nspnsp@25</password>
-            <applicationName>${project.artifactId}</applicationName>
-            <releaseChannel>Edge</releaseChannel>
-            <replicas>1</replicas>
-            <vCores>0.1</vCores>
-            <deploymentSettings>
-                <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
-            </deploymentSettings>
-        </cloudhub2Deployment>
-    </configuration>
-</plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-maven-plugin</artifactId>
+                <version>4.2.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                   <classifier>mule-application</classifier>
+                   <cloudhub2Deployment>
+                       <uri>https://anypoint.mulesoft.com</uri>
+                       <provider>MC</provider>
+                       <environment>Sandbox</environment>
+                       <target>Cloudhub-US-East-2</target>
+                       <server>Repository</server>
+			           <muleVersion>${muleVersion}</muleVersion>
+                       <username>nitheesh_p</username>
+                       <password>Nspnsp@25</password>
+                       <applicationName>${project.artifactId}</applicationName>
+                       <releaseChannel>Edge</releaseChannel>
+                       <replicas>1</replicas>
+                       <vCores>0.1</vCores>
+                       <deploymentSettings>
+                           <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+                       </deploymentSettings>
+                    </cloudhub2Deployment>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

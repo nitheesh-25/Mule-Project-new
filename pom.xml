@@ -4,7 +4,7 @@
 
 	<groupId>a6b8bc47-174c-4a54-b421-a77d90d7ae8f</groupId>
 	<artifactId>newxml</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<packaging>mule-application</packaging>
 
 	<name>newxml</name>
@@ -36,7 +36,7 @@
             <uri>https://anypoint.mulesoft.com</uri>
             <provider>MC</provider>
             <environment>Sandbox</environment>
-            <target>Cloudhub-US-East-2</target>
+            <target>Cloudhub-US-East-1</target>
             <server>Repository</server>
             <applicationName>${project.artifactId}</applicationName>
             <releaseChannel>Edge</releaseChannel>

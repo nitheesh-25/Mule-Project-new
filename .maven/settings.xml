@@ -13,12 +13,4 @@
     </server>
   </servers>
 
-  <servers>
-  <server>
-    <id>anypoint-exchange-v3</id>
-    <username>nitheesh_p</username>
-    <password>Nspnsp@25</password>
-  </server>
-</servers>
-
 </settings>
